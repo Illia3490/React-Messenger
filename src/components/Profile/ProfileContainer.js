@@ -2,20 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getUsers } from '../../redux/firebaseReducer';
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Profile } from './Profile';
 
 
 
 const ProfileContainer = (props) => {
-
     const [myData] = useAuthState(props.firebaseAuth)
-
-
-
-
-
 
     return <>
         <Profile

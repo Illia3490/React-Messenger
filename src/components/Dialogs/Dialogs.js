@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import s from './Dialogs.module.css'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Loading } from '../commons/Loader/Loading'
-import firebase from 'firebase'
+
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Messages from './messages/Messages'
 

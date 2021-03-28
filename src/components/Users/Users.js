@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './Users.module.css'
-import { Paginator } from '../commons/Paginator/Paginator'
-import { User } from './User'
+
 import { Loading } from '../commons/Loader/Loading'
 import { Redirect } from 'react-router'
 
