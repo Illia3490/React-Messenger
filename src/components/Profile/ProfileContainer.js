@@ -1,29 +1,45 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Profile } from './Profile'
-import { getProfile, getStatus, updateStatus } from '../../redux/profileReducer'
-import { withRouter } from 'react-router-dom'
-import { compose } from 'redux'
-class ProfileContainer extends Component {
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { getUsers } from '../../redux/firebaseReducer';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { Profile } from './Profile';
 
-    componentDidMount() {
-        this.props.getProfile(this.props.match.params.userId)
-        this.props.getStatus(this.props.match.params.userId)
-    }
 
-    render() {
-        return <Profile {...this.props} status={this.props.status} updateStatus={this.props.updateStatus} />
-    }
+
+const ProfileContainer = (props) => {
+
+    const [myData] = useAuthState(props.firebaseAuth)
+
+
+
+
+
+
+    return <>
+        <Profile
+            myData={myData}
+
+        />
+    </>
 }
 
+
+
+
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status
+    users: state.firebase.users,
+    firestore: state.firebase.firestore,
+    firebaseAuth: state.firebase.firebaseAuth
 })
 
 
 export default compose(
-    // withAuthRedirect,
-    withRouter,
-    connect(mapStateToProps, { getProfile, getStatus, updateStatus })
+    connect(mapStateToProps, {
+        getUsers
+    })
 )(ProfileContainer)
+
+
+

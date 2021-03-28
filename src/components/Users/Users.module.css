@@ -1,7 +1,25 @@
-.userPhoto {
-  width: 50px;
-  height: 50px;
+.users {
+  color: white;
+  margin: 20px;
 }
-.selectedPage {
-  font-weight: bold;
+.userContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.userContainer img {
+  width: 60px;
+  height: 60px;
+  margin-right: 30px;
+}
+.AddToFriendsButton {
+  border: 1px solid rgb(218, 26, 64);
+  padding: 10px;
+  position: absolute;
+  left: 400px;
+  font-size: 15px;
+  font-weight: 500;
 }

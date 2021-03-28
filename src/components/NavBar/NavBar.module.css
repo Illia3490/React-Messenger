@@ -1,16 +1,32 @@
 .nav {
   grid-area: n;
-  background-color: rgb(25, 25, 221);
+  background-color: rgb(26, 26, 26);
+  border-right-style: solid;
+  border-width: 1px;
 }
 
 .item a {
-  color: tomato;
+  color: rgb(220, 20, 60);
   padding: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: stretch;
   text-decoration: none;
+  
 }
-.item a.active {
+.item a.active  {
   color: white;
+  border-left-color: white;
+  border-width: 2px;
+  border-left-style: solid;
+}
+
+.item a.active img {
+  opacity: 1;
+}
+
+.item  img {
+  width: 20px;
+  padding-right: 10px;
+  opacity: 0.5;
 }

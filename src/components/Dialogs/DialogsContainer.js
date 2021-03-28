@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { sendMessage } from '../../redux/dialogsReducer';
 import { Dialogs } from './Dialogs';
 
 // class DialogsContainer extends Component {
@@ -18,8 +16,9 @@ import { Dialogs } from './Dialogs';
 
 let mapStateToProps = (state) => {
     return {
-        messagesPage: state.messagesPage,
-        isAuth: state.auth.isAuth,
+        firebaseAuth: state.firebase.firebaseAuth,
+        firestore: state.firebase.firestore,
+        userData: state.firebase.userData,
     }
 }
 // let mapDispatchToProps = (dispatch) => {
@@ -34,6 +33,5 @@ let mapStateToProps = (state) => {
 // }
 
 export default compose(
-    connect(mapStateToProps, { sendMessage }),
-    withAuthRedirect
+    connect(mapStateToProps, {}),
 )(Dialogs)

@@ -1,84 +1,89 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { follow, getUsers, setCurrentPageAC, setDisableButtonAC, unFollow } from '../../redux/usersReducer';
 import Users from './Users';
-import { Loading } from '../commons/Loading';
 import { compose } from 'redux';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { getUsers } from '../../redux/firebaseReducer';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+import firebase from 'firebase'
+import { Redirect } from 'react-router';
 
 
-class UsersContainer extends Component {
 
-    componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+const UsersContainer = (props) => {
+    const [users] = useCollectionData(props.firestore.collection('users'))
+    const [myData] = useAuthState(props.firebaseAuth)
+    const [dialogs, loading] = useCollectionData(props.firestore.collection('dialogs'))
+    const [exist, setExist] = useState(false)
+
+    const sendMessage = (user) => {
+        dialogs.map((d) => {
+            if (!d.doc === myData.uid +
+                myData.displayName.toUpperCase().replace(/\s/g, "")
+                + '-' + user.name.toUpperCase().replace(/\s/g, "")
+                + user.id && user.id +
+                user.name.toUpperCase().replace(/\s/g, "")
+                + '-' + myData.displayName.toUpperCase().replace(/\s/g, "")
+                + myData.uid) {
+                props.firestore.collection('dialogs')
+                    .doc(myData.uid +
+                        myData.displayName.toUpperCase().replace(/\s/g, "")
+                        + '-' + user.name.toUpperCase().replace(/\s/g, "")
+                        + user.id
+                    )
+                    .set({
+                        id: user.id + myData.uid,
+                        uid1: user.id,
+                        uid2: myData.uid,
+                        userPhoto: user.photoUrl,
+                        myPhoto: myData.photoURL,
+                        userName: user.name,
+                        myName: myData.displayName,
+                        doc: myData.uid +
+                            myData.displayName.toUpperCase().replace(/\s/g, "")
+                            + '-' + user.name.toUpperCase().replace(/\s/g, "")
+                            + user.id,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                props.firestore.collection('dialogs')
+                    .doc(myData.uid + myData.displayName.toUpperCase().replace(/\s/g, "")
+                        + '-' + user.name.toUpperCase().replace(/\s/g, "")
+                        + user.id)
+                    .collection('messages')
+            } else {
+                setExist(true)
+
+            }
+        })
+
     }
 
-    onPageChanged = (pageNumber) => {
-        // this.props.setCurrentPageAC(pageNumber)
-        this.props.getUsers(this.props.currentPage, this.props.pageSize, pageNumber)
-    }
 
-    render() {
-        return <>
-            {this.props.isLoading ? <Loading />
-                : <Users
-                    onPageChanged={this.onPageChanged}
-                    totalUserCount={this.props.totalUserCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
-                    users={this.props.users}
-                    follow={this.props.follow}
-                    unFollow={this.props.unFollow}
-                    followingInProgress={this.props.followingInProgress}
-                />}
-        </>
-    }
 
+    return <>
+        <Users
+            users={users}
+            myData={myData}
+            sendMessage={sendMessage}
+            exist={exist}
+        />
+    </>
 }
 
 
-let mapStateToProps = (state) => {
 
-    return {
-        users: state.usersPage.users,
-        totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage.currentPage,
-        pageSize: state.usersPage.pageSize,
-        isLoading: state.usersPage.isLoading,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         onFollow: (userId) => {
-//             dispatch(followAC(userId))
-//         },
-//         onUnFollow: (userId) => {
-//             dispatch(unFollowAC(userId))
-//         },
-//         onSetUser: (users) => {
-//             dispatch(setUserAC(users))
-//         },
-//         onSetTotalUsersCount: (countUsers) => {
-//             dispatch(setTotalUsersCountAC(countUsers))
-//         },
-//         onSetCurrentPage: (pageNumber) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         onSetIsLoading: (isLoading) => {
-//             dispatch(setIsLoadingAC(isLoading))
-//         }
-//     }
-// }
+
+let mapStateToProps = (state) => ({
+    users: state.firebase.users,
+    firestore: state.firebase.firestore,
+    firebaseAuth: state.firebase.firebaseAuth
+})
+
 
 export default compose(
-    withAuthRedirect,
     connect(mapStateToProps, {
-        setCurrentPageAC,
-        setDisableButtonAC,
-        getUsers,
-        follow,
-        unFollow
+        getUsers
     })
 )(UsersContainer)
 

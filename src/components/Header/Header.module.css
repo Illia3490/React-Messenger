@@ -1,13 +1,21 @@
 .header {
   grid-area: h;
-  background-color: crimson;
+  background-color: rgb(220, 20, 60);
 }
 .header img {
-  width: 100px;
+  width: 60px;
+  height: 60px;
+  padding-left: 15px;
 }
 .login {
   float: right;
+  padding-top: 15px;
+  text-decoration: none;
 }
 .login a {
-  color: white;
+  color: rgb(255, 255, 255);
+}
+.signup {
+  padding: 20px;
+  text-decoration: none;
 }

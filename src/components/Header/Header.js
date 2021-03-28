@@ -1,19 +1,28 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import s from './Header.module.css'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
-export const Header = (props) => {
+export const Header = ({ firebaseAuth, getAuth, signOut }) => {
+    const [Auth] = useAuthState(firebaseAuth)
     return (
         <header className={s.header}>
             <img
-                src='https://latkaservis.com.ua/content/images/2/96207806519426_small2.jpg'
+                src='https://img.icons8.com/plasticine/344/telegram-app.png'
                 alt='Logo'
+
             />
             <div className={s.login}>
-                {props.isAuth ? props.login
-                    : <NavLink to='/login'>Login</NavLink>
+                {Auth ? <div>
+                    <div onClick={() => signOut(firebaseAuth)} ><img style={{ marginRight: 10, marginTop: -15, position: 'relative' }} src='https://img.icons8.com/plasticine/2x/exit.png'></img></div>
+                </div>
+                    : <div>
+                        <NavLink to='/login'>Login</NavLink>
+                        <NavLink to='signup' className={s.signup}>Sign Up</NavLink>
+                    </div>
                 }
+
             </div>
-        </header>
+        </header >
     )
 }

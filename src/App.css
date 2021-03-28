@@ -5,9 +5,11 @@
     "n c";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
+  height: 100vh;
 }
 .AppContent {
-  padding: 10px;
   grid-area: c;
-  background-color: darkorchid;
+  background-color: rgb(44, 44, 44);
+  overflow-y: hidden;
+  overflow-x: hidden;
 }

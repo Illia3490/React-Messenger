@@ -1,26 +1,220 @@
 .dialogs {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-}
-.dialogsItem {
-}
-.messages {
-  padding: 10px;
-}
-.message {
+  color: white;
+  border-bottom: 1px solid rgb(139, 139, 139);
+  width: 27.7%;
+  height: 80px;
 }
 
-.dialog a {
-  color: darkorange;
-  text-decoration: none;
+.dialogs img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  margin-top: 10px;
   margin-left: 20px;
 }
-
-.dialog a.active {
-  color: rgb(245, 219, 219);
+.dialogsName {
+  position: relative;
+  margin-left: 95px;
+  bottom: 40px;
 }
-.dialogImage {
+
+.componentContainer {
+  position: absolute;
+  right: 0px;
+  top: 60px;
+  width: 60%;
+  height: 91.9%;
+  border-left: 1px solid rgb(139, 139, 139);
+}
+.messagesContainer {
+  overflow-y: scroll;
+  margin-top: 20px;
+}
+.message {
+  position: relative;
+}
+.message img {
   width: 50px;
   height: 50px;
   border-radius: 25px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.name {
+  color: rgb(139, 139, 139);
+  width: 300px;
+  margin-left: 100px;
+  position: absolute;
+  bottom: 35px;
+}
+.time {
+  color: rgb(179, 179, 179);
+  margin-left: 200px;
+  position: absolute;
+  right: 40px;
+  top: 20px;
+}
+.messageText {
+  color: white;
+  max-width: 500px;
+  margin-left: 100px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.inputContainer {
+  position: fixed;
+  width: 80%;
+  height: 50px;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: rgb(44, 44, 44);
+  border-top: 1px solid rgb(139, 139, 139);
+  color: rgb(139, 139, 139);
+}
+.textArea {
+  width: 20%;
+  margin: 15px;
+  background-color: rgb(44, 44, 44);
+  color: white;
+  border: none;
+  margin-right: 75%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  outline: none;
+  -moz-appearance: none;
+  resize: none;
+  overflow: auto;
+}
+.sendButton {
+  position: fixed;
+  height: 35px;
+  width: 50px;
+  bottom: 8px;
+  right: 20px;
+  background-color: rgb(44, 44, 44);
+  outline: none;
+  border: none;
+}
+.sendButton img {
+  height: 30px;
+  width: 30px;
+}
+/* 
+.chats {
+  display: flex;
+
+  height: 100%;
+} */
+/* .chatsContainer {
+  grid-area: f;
+  /* height: 60px;
+  border: 1px solid rgb(139, 139, 139);
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden; */
+
+/* .chatsContainer img {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+} */
+
+/* .dialogsContainer {
+  grid-area: d;
+  display: grid;
+  grid-template-areas:
+    "m m"
+    "i i";
+  grid-template-rows: 1fr 60px;
+} */
+/* .messagesContainer {
+  grid-area: m;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 90vh;
+  overflow: auto;
+  color: rgb(139, 139, 139);
+  border: 1px solid;
+} */
+/* .inputContainer {
+  grid-area: i;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: rgb(44, 44, 44);
+  border-top: 1px solid rgb(139, 139, 139);
+  color: rgb(139, 139, 139);
+  border-left: 1px solid;
+} */
+/* .textArea {
+  grid-area: i;
+  width: 90%;
+  right: 100px;
+  margin: 15px;
+  background-color: rgb(44, 44, 44);
+  color: white;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  outline: none;
+  -moz-appearance: none;
+  resize: none;
+  overflow: auto;
+} */
+/* .sendButton {
+  position: fixed;
+  height: 35px;
+  width: 50px;
+  bottom: 10px;
+  right: 20px;
+  background-color: rgb(44, 44, 44);
+  outline: none;
+  border: none;
+} */
+/* .sendButton img {
+  height: 30px;
+  width: 30px;
+} */
+/* .messageContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+} */
+/* .message {
+  margin-left: 20px;
+  width: 90%;
+  margin: 10px;
+} */
+
+/* .messagePhoto {
+  display: flex;
+  justify-content: flex-start;
+  margin: 5px;
+  color: rgb(218, 26, 64);
+  font-size: 15px;
+  font-weight: bold;
+} */
+/* 
+.messagePhoto img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  padding: 5px;
+} */
+
+.noDialogs {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
