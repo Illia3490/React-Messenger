@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import firebase from 'firebase'
 import LogIn from './LogIn'
-import { getUserData, getUsers } from '../../../redux/firebaseReducer'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 
 
 const LogInContainer = (props) => {
     const [users] = useCollectionData(props.firestore.collection('users'))
+
 
     const loginWith = async (loginWithProvider) => {
         const provider = new loginWithProvider
@@ -42,9 +43,8 @@ const LogInContainer = (props) => {
 
 const mapStateToProps = (state) => ({
     firebaseAuth: state.firebase.firebaseAuth,
-    userData: state.firebase.userData,
     firestore: state.firebase.firestore,
 
 })
 
-export default connect(mapStateToProps, { getUsers, getUserData })(LogInContainer)
+export default connect(mapStateToProps, {})(LogInContainer)

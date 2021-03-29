@@ -17,7 +17,7 @@ const Messages = ({ firestore, firebaseAuth, doc, userData }) => {
     )
     const [value, setValue] = useState('')
     // const [messages, loading] = useCollectionData(firestore.collection('messages').orderBy('createdAt'))
-
+    // const user = false
 
     const sendMessage = async () => {
         firestore.collection('dialogs').doc(doc).collection('messages')

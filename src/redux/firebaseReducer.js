@@ -26,10 +26,6 @@ let initialState = {
     firebase: firebase,
     firebaseAuth: auth,
     firestore: firestore,
-    Auth: false,
-    userData: null,
-    users: firebase.firestore.QuerySnapshot.docs
-
 }
 
 const firebaseReducer = (state = initialState, action) => {
@@ -59,34 +55,13 @@ const firebaseReducer = (state = initialState, action) => {
 
 }
 
-export const setUserData = (userData) => ({ type: SET_USER_DATA, userData })
-export const setAuth = (Auth) => ({ type: SET_AUTH, Auth })
-export const setUsers = (users) => ({ type: SET_USERS, users })
 
-export const getUsers = (users) => (dispatch) => {
-    dispatch(setUsers(users))
-}
-
-export const getUserData = (userData) => (dispatch) => {
-    dispatch(setUserData(userData))
-}
-
-
-export const getAuth = (userData) => (dispatch) => {
-    if (userData) {
-        dispatch(setAuth(true))
-    } else {
-        dispatch(setAuth(false))
-    }
-
-}
 export const signOut = (firebaseAuth) => async (dispatch) => {
     try {
         await firebaseAuth.signOut()
     } catch (error) {
         console.log(error)
     }
-    dispatch(getAuth(false))
 }
 
 

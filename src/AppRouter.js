@@ -3,11 +3,12 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { Redirect, Route, Switch } from 'react-router'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
-import LogIn from './components/Register/LogIn/LogIn'
+import LogInContainer from './components/Register/LogIn/LogInContainer'
 import UsersContainer from './components/Users/UsersContainer'
 
 const AppRouter = ({ firebaseAuth }) => {
     const [user] = useAuthState(firebaseAuth)
+    // const user = false
     return user ? (
         <Switch>
             <Route path="/dialogs" component={DialogsContainer} />
@@ -20,7 +21,7 @@ const AppRouter = ({ firebaseAuth }) => {
         :
         (
             <Switch>
-                <Route path="/login" component={LogIn} />
+                <Route path="/login" component={LogInContainer} />
                 <Redirect to={'/login'} />
             </Switch>
         )

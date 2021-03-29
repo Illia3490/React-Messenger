@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import Users from './Users';
 import { compose } from 'redux';
-import { getUsers } from '../../redux/firebaseReducer';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import firebase from 'firebase'
-import { Redirect } from 'react-router';
 
 
 
@@ -52,8 +50,7 @@ const UsersContainer = (props) => {
                         + user.id)
                     .collection('messages')
             } else {
-                setExist(true)
-
+                setExist(!exist)
             }
         })
 
@@ -75,17 +72,13 @@ const UsersContainer = (props) => {
 
 
 let mapStateToProps = (state) => ({
-    users: state.firebase.users,
     firestore: state.firebase.firestore,
     firebaseAuth: state.firebase.firebaseAuth
 })
 
 
 export default compose(
-    connect(mapStateToProps, {
-        getUsers
-    })
-)(UsersContainer)
+    connect(mapStateToProps, {}))(UsersContainer)
 
 
 

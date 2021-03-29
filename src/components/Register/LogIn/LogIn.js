@@ -5,12 +5,13 @@ import { Loading } from '../../commons/Loader/Loading'
 import { Redirect } from 'react-router'
 import firebase from 'firebase'
 
-const LogIn = ({ firebaseAuth, loginWith, loginWithGoogle, loginWithFacebook, getAuthFirebase, firestore, ...props }) => {
-    const [Auth] = useAuthState(firebaseAuth)
+const LogIn = ({ loginWith, getAuthFirebase, firestore, ...props }) => {
+    const [auth] = useAuthState(props.firebaseAuth)
 
 
-    if (Auth) {
-        console.log(Auth)
+
+    if (auth) {
+        console.log(auth)
         return <Redirect to={'/dialogs'} />
 
     }

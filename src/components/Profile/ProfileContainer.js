@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getUsers } from '../../redux/firebaseReducer';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Profile } from './Profile';
 
@@ -29,10 +28,7 @@ let mapStateToProps = (state) => ({
 
 
 export default compose(
-    connect(mapStateToProps, {
-        getUsers
-    })
-)(ProfileContainer)
+    connect(mapStateToProps, {}))(ProfileContainer)
 
 
 
