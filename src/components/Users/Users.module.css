@@ -1,24 +1,33 @@
 .users {
-  color: white;
+  color: rgb(0, 0, 0);
   margin: 20px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .userContainer {
   display: flex;
+
   align-items: center;
   margin-bottom: 30px;
-  position: relative;
-  overflow-x: hidden;
 }
 .userContainer img {
   width: 60px;
   height: 60px;
   margin-right: 30px;
 }
+.name {
+  width: 200px;
+}
 .AddToFriendsButton {
   border: 1px solid rgb(218, 26, 64);
   padding: 10px;
-  position: absolute;
-  left: 400px;
+  position: relative;
+  left: 10%;
   font-size: 15px;
   font-weight: 500;
+}
+.AddToFriendsButton:hover {
+  background-color: rgb(218, 26, 64);
+  color: white;
 }

@@ -7,7 +7,7 @@
 .text {
   font-size: 20px;
   font-weight: 400;
-  color: white;
+  color: rgb(0, 0, 0);
   position: relative;
   left: 220px;
   bottom: 100px;

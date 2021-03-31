@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import s from '../Dialogs.module.css'
+import React, { useLayoutEffect, useState } from 'react'
+import s from './Messages.module.css'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Loading } from '../../commons/Loader/Loading'
 import firebase from 'firebase'
@@ -9,18 +9,25 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Messages = ({ firestore, firebaseAuth, doc, userData }) => {
     const [user] = useAuthState(firebaseAuth)
-    const [messages] = useCollectionData(
-        firestore.collection('dialogs')
-            .doc(doc)
-            .collection('messages')
-            .orderBy('createdAt')
-    )
+    const [myMessages, setMyMessages] = useState([])
     const [value, setValue] = useState('')
-    // const [messages, loading] = useCollectionData(firestore.collection('messages').orderBy('createdAt'))
-    // const user = false
+
+    useLayoutEffect(() => {
+        const getMessages = firestore.collection('dialogs').doc(doc.doc1)
+            .collection('messages').orderBy('createdAt').onSnapshot((snapshot) =>
+                setMyMessages(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    }))
+                )
+            )
+        return getMessages
+    }, [doc])
+
 
     const sendMessage = async () => {
-        firestore.collection('dialogs').doc(doc).collection('messages')
+        firestore.collection('dialogs').doc(doc.doc1).collection('messages')
             .add({
                 id: user.uid,
                 name: user.displayName,
@@ -28,7 +35,6 @@ const Messages = ({ firestore, firebaseAuth, doc, userData }) => {
                 photoUrl: user.photoURL,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             })
-        setValue('')
     }
     const getDate = (Date) => {
         let minutes = Date.getMinutes()
@@ -42,42 +48,54 @@ const Messages = ({ firestore, firebaseAuth, doc, userData }) => {
         }
     }
 
-    if (!messages) {
+
+
+    if (!myMessages) {
         <Loading />
     }
     return (
-        <div className={s.dialogsContainer}>
+        <div className={s.chatContainer}>
+            {doc !== 'CHOSECHAT' &&
+                <div className={s.messagesContainer}>
+                    <div className={s.heder}>
+                        <img src={doc.userPhoto}></img>
+                        <div className={s.name}>{doc.userName}</div>
+                    </div>
+                    {user && myMessages ? myMessages.map(({ data }) =>
+                        <div className={s.messages} key={data.createdAt} >
+                            <div className={s.message}>
+                                <img src={data.photoUrl}></img>
+                                <div className={s.name}>{data.name}</div>
+                                <div className={s.time}>
+                                    {data.createdAt ? getDate(data.createdAt.toDate()) : null}
+                                </div>
+                                <div className={s.messageText}>
+                                    {data.text}
+                                </div>
 
-            <span className={s.messagesContainer}>
-                {user && messages ? messages.map(m =>
-                    <div className={s.messageContainer} key={m.createdAt} >
-                        <div className={s.message}>
-                            <img src={m.photoUrl}></img>
-                            <div className={s.name}>{m.name}</div>
-                            <div className={s.messageText}>
-                                {m.text}
-                            </div>
-                            <div className={s.time}>
-                                {m.createdAt ? getDate(m.createdAt.toDate()) : null}
                             </div>
                         </div>
-                    </div>
-                )
-                    :
-                    null
-                }
-            </span>
-            <div className={s.inputContainer}>
-                <textarea
-                    placeholder='Enter message'
-                    className={s.textArea}
-                    type="text"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}></textarea>
-                <button onClick={() => !value.startsWith(' ') && messages ? sendMessage() : console.log('zeroMessage')} className={s.sendButton}>
-                    <img src="https://img.icons8.com/nolan/2x/filled-sent.png"></img>
-                </button>
-            </div>
+
+                    )
+                        :
+                        null
+                    }
+
+                </div>
+            }
+            {doc !== 'CHOSECHAT' &&
+                <div className={s.inputContainer}>
+                    <input
+                        placeholder='Enter message'
+                        className={s.input}
+                        type="text"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}></input>
+                    <button onClick={() => !value.startsWith(' ') && myMessages && value.length > 0 ? sendMessage() : console.log('zeroMessage')} className={s.sendButton}>
+                        <img src="https://img.icons8.com/nolan/2x/filled-sent.png"></img>
+                    </button>
+                </div>
+            }
         </div>
     )
 }

@@ -18,8 +18,8 @@ const LogInContainer = (props) => {
     }
     const createNewUser = async (user) => {
         if (user.additionalUserInfo.isNewUser) {
-            props.firestore.collection('users')
-                .add({
+            props.firestore.collection('users').doc(user.user.uid)
+                .set({
                     id: user.user.uid,
                     name: user.user.displayName,
                     photoUrl: user.user.photoURL,

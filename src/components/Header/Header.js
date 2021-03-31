@@ -13,9 +13,8 @@ export const Header = ({ firebaseAuth, getAuth, signOut }) => {
 
             />
             <div className={s.login}>
-                {Auth ? <div>
-                    <div onClick={() => signOut(firebaseAuth)} ><img style={{ marginRight: 10, marginTop: -15, position: 'relative' }} src='https://img.icons8.com/plasticine/2x/exit.png'></img></div>
-                </div>
+                {Auth ?
+                    <div className={s.ifAuth}><img src={Auth.photoURL}></img></div>
                     : <div>
                         <NavLink to='/login'>Login</NavLink>
                         <NavLink to='signup' className={s.signup}>Sign Up</NavLink>

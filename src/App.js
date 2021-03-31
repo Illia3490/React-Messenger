@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { NavBar } from './components/NavBar/NavBar';
+import NavBarContainer from './components/NavBar/NavBarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -18,7 +18,7 @@ const App = (props) => {
   return (
     <div className="App">
       <HeaderContainer />
-      <NavBar />
+      <NavBarContainer />
       <div className="AppContent">
         <AppRouter firebaseAuth={props.firebaseAuth} />
       </div>

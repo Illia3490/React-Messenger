@@ -4,12 +4,12 @@
     "h h"
     "n c";
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 70px 10fr;
   height: 100vh;
 }
 .AppContent {
   grid-area: c;
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(255, 255, 255);
   overflow-y: hidden;
   overflow-x: hidden;
 }
