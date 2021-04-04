@@ -17,7 +17,8 @@ const LogIn = ({ loginWith, getAuthFirebase, firestore, ...props }) => {
     }
 
     return (
-        <div>
+        <div className={styles.loginContainer}>
+            <div className={styles.title}>Hi, log in to start...</div>
             <div className={styles.LogIn}>
                 <img src="https://img.icons8.com/plasticine/344/google-logo.png" ></img>
                 <button onClick={() => loginWith(firebase.auth.GoogleAuthProvider)}>Login with Google</button>

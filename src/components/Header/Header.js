@@ -14,11 +14,10 @@ export const Header = ({ firebaseAuth, getAuth, signOut }) => {
             />
             <div className={s.login}>
                 {Auth ?
-                    <div className={s.ifAuth}><img src={Auth.photoURL}></img></div>
-                    : <div>
-                        <NavLink to='/login'>Login</NavLink>
-                        <NavLink to='signup' className={s.signup}>Sign Up</NavLink>
-                    </div>
+                    <div className={s.ifAuth}><img src={Auth.photoURL}></img></div> : null
+                    // : <div>
+                    //     <NavLink to='/login' className={s.textLogin}>Login</NavLink>
+                    // </div>
                 }
 
             </div>

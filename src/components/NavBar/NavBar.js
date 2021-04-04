@@ -2,8 +2,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import s from './NavBar.module.css'
 import { useAuthState } from 'react-firebase-hooks/auth'
-export const NavBar = ({ firebaseAuth, signOut }) => {
-    const [Auth] = useAuthState(firebaseAuth)
+export const NavBar = ({ firebaseAuth, signOut, firestore, isOnline }) => {
+    const [user] = useAuthState(firebaseAuth)
+
+    const signOutFun = () => {
+        isOnline(firestore, user, false).then(() => signOut(firebaseAuth))
+
+    }
+
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -39,8 +45,8 @@ export const NavBar = ({ firebaseAuth, signOut }) => {
                         src='https://img.icons8.com/ios/344/ffffff/settings--v1.png'></img>
                 </NavLink>
             </div>
-            {Auth ? <div>
-                <div className={s.signOut} onClick={() => signOut(firebaseAuth)} ><img src='https://img.icons8.com/plasticine/2x/exit.png'></img></div>
+            {user ? <div>
+                <div className={s.signOut} onClick={signOutFun} ><img src='https://img.icons8.com/plasticine/2x/exit.png'></img></div>
             </div> : null}
         </nav>
     )

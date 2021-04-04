@@ -63,6 +63,16 @@ export const signOut = (firebaseAuth) => async (dispatch) => {
         console.log(error)
     }
 }
+export const isOnline = (firestore, user, online) => async (dispatch) => {
+    try {
+        await firestore.collection('users').doc(user.uid)
+            .update({
+                isOnline: online,
+            })
+    } catch (error) {
+
+    }
+}
 
 
 export default firebaseReducer;

@@ -31,3 +31,13 @@
   background-color: rgb(218, 26, 64);
   color: white;
 }
+.online {
+  background-color: rgb(8, 184, 8);
+  height: 8px;
+  width: 8px;
+  border-radius: 8px;
+  position: absolute;
+  margin-top: 54px;
+  margin-left: 54px;
+  border: 2px solid white;
+}

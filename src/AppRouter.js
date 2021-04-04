@@ -12,7 +12,7 @@ const AppRouter = ({ firebaseAuth }) => {
     return user ? (
         <Switch>
             <Route path="/dialogs" component={DialogsContainer} />
-            <Route path="/profile" component={ProfileContainer} />
+            <Route path="/profile/:email?" component={ProfileContainer} />
             <Route path="/users" component={UsersContainer} />
 
             <Redirect to={'/dialogs'} />

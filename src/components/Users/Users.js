@@ -6,7 +6,7 @@ import { Redirect } from 'react-router'
 
 const Users = ({ sendMessage, myData, users, exist, success, dialogs, ...props }) => {
 
-    const [ex, setEx] = useState()
+
 
     if (!users) {
         return <Loading />
@@ -24,9 +24,9 @@ const Users = ({ sendMessage, myData, users, exist, success, dialogs, ...props }
         <div className={styles.users}>
             { users.map((user) => myData.uid !== user.id ?
                 <div key={user.id} className={styles.userContainer}>
-
                     <img src={user.photoUrl}></img>
                     <div className={styles.name}>{user.name}</div>
+                    {user.isOnline && <div className={styles.online}></div>}
                     <div className={styles.AddToFriendsButton} onClick={() => sendMessage(user)}>Send Message</div>
                 </div>
                 : null)

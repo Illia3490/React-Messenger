@@ -1,12 +1,17 @@
 .chatContainer {
   position: fixed;
   height: 75vh;
-  width: 65%;
-  top: 130px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  width: 73%;
+  top: 116px;
+}
+@media (max-width: 900px) {
+  .chatContainer {
+    width: 90%;
+  }
 }
 .messagesContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .heder {
   border-bottom: 1px solid rgb(235, 235, 235);
@@ -14,8 +19,9 @@
   top: 65px;
   position: fixed;
   background-color: white;
-  width: 65%;
+  width: 73%;
   z-index: 3;
+  text-decoration: none;
 }
 .heder img {
   height: 40px;
@@ -34,9 +40,12 @@
 .name {
   font-size: 15px;
   font-weight: bold;
+
   position: relative;
   left: 50px;
-  bottom: 50px;
+  bottom: 45px;
+  color: rgb(48, 48, 48);
+  text-decoration: none;
 }
 .messageText {
   background-color: rgb(235, 235, 235);
@@ -49,7 +58,7 @@
 .time {
   color: rgb(131, 131, 131);
   font-size: 12px;
-  margin-top: -45px;
+  margin-top: -40px;
   margin-left: 50px;
 }
 .inputContainer {
